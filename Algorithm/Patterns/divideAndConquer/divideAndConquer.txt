@@ -1,0 +1,23 @@
+//write a fucntion which will take an array a num and will search that num 
+//in that if found then return index else -1
+function search(arr,num){
+    let min =0,val=0;
+    let max= arr.length-1;
+    while(min<=max){
+     let middle = Math.floor((min+max)/2);
+     let current = arr[middle];   
+    if(current>num){
+        max--;
+    } 
+    if(current<num){
+        min++;
+    }  
+    else{
+        return middle;
+    }
+    
+
+    }return -1;
+}
+
+console.log(search([1,5,7,7.5,8,9],8))

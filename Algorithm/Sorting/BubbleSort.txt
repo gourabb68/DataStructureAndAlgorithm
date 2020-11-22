@@ -1,0 +1,44 @@
+//implement bubble sort
+
+function bubbleSort(a){
+    let temp=0;
+    for(let i=0;i<a.length;i++){
+        //loop through array i =0 to length of the array
+        for(let j=0;j<a.length-i;j++){
+            //loop j =0 to length of array -1 as in each pass 
+            //we are sorting data from right side
+            if(a[j]>a[j+1]){
+                console.log("array: " + a + "swap pair: "+ a[j] +' <-> '+ a[j+1])
+                temp = a[j+1];
+                a[j+1]=a[j];
+                a[j]=temp;
+
+            }
+        }
+        console.log(i+1 +" pass is Completed")
+    }
+    return a;
+}
+
+console.log(bubbleSort([17,11,5,20,12]))
+
+// //implement bubble sort with optimization 
+
+function bubbleSort(a){
+    let swap;
+    for(let i=0;i<a.length;i++){
+        swap=false;
+        for(let j=0;j<a.length-i;j++){
+            if(a[j]>a[j+1]){
+                 console.log("array: " + a + "swap pair: "+ a[j] +' <-> '+ a[j+1]);                
+               [a[j],a[j+1]]=[a[j+1],a[j]]; //using destructuring syntax
+                swap = true;
+            }
+        }
+        if(!swap) break;
+         console.log(i+1 +" pass is Completed")
+    }
+    return a;
+}
+
+console.log(bubbleSort([17,11,3,5,20,12]))

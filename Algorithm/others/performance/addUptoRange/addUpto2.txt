@@ -1,0 +1,13 @@
+////addUpTo2
+//adding no 1 to n
+function addupto2(n)
+{
+   let total = n *(n+1) / 2;
+   return total;
+}
+
+//get time before function is called
+let t1 = performance.now();
+console.log(addupto2(100000000));
+let t2 = performance.now();
+console.log("time taken " + (t2-t1)/1000 + "sec")

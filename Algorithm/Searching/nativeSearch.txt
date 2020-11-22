@@ -1,0 +1,20 @@
+//implement native search where you have to find substring in 
+//longstring and return base index or -1 if not present
+//nativeSearch('owesomgog','omg')//4
+
+function nativeSearch(str,sub){
+    let k=0;
+    for(let i=0;i<str.length;i++){
+        if(str[i]===sub[k]){
+            if(k===sub.length-1){
+                return i-k;
+            }
+            k++;
+        }else{
+            k=0;
+        }
+    }
+    return -1;
+}
+
+console.log(nativeSearch('owes omgog','omg'))

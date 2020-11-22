@@ -1,0 +1,15 @@
+//implement a fucntion which will take a number say n and  return nth fibonacci no from a fubonacci series using recursion
+// 1 1 2 3 5 8 13
+//fib(7)// 13
+
+function fib(n){
+    if(n<=2) return 1;
+    return  fib(n-1) + fib(n-2)
+}
+
+console.log(fib(4))
+
+
+
+
+             

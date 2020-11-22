@@ -1,0 +1,21 @@
+//write a function that will take an array and a num and will return max 
+//sum value for consecution up to that num
+function slideWindow(arr,num){
+    if(num> arr.length) return null;
+    let tempSum=0, maxSum=0;
+    //get sum of first  0 to num 
+    for(let i=0; i<num ; i++)
+    {
+        maxSum =maxSum+ arr[i];
+    }
+
+    //use window and slide towards right substract prev no and add next no
+    for(let i=num ;i<arr.length-num+1;i++){
+        tempSum = maxSum + arr[i] - arr[i-num];
+        maxSum = maxSum>tempSum? maxSum:tempSum; 
+    }
+    return maxSum;
+
+}
+
+console.log(slideWindow([2,6,6,4,6,3,6,2,3,8,5],4))

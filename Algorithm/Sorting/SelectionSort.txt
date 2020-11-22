@@ -1,0 +1,27 @@
+//implement selection sort
+
+function selectionSort(a){
+    let minIndex;
+    for(let i=0;i<a.length;i++){
+             minIndex=i;//assume first one is smallest       
+        for(let j=i+1;j<a.length;j++){       
+            //loop j =i+1 to length of array as in each pass 
+            //we are sorting data from left side
+           console.log("array: " + a + " checking pair: "+ a[minIndex] +' <-> '+ a[j])  
+            if(a[minIndex]>a[j]){//checking smallest value
+                minIndex =j; //updating smallest index
+                         
+            }
+        }
+        console.log("***************")
+        console.log(i+1 +" pass is Completed min: "+a[minIndex]);
+        if(i!==minIndex){
+            console.log("swapping pair: "+a[i] +' <-->'+a[minIndex]);
+            [a[i],a[minIndex]]=[a[minIndex],a[i]];
+        }
+           
+    }
+    return a;
+}
+
+console.log(selectionSort([17,11,5,20,12]))

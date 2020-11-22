@@ -1,0 +1,19 @@
+//implement function called areThreeDuplicate which accepts a variable 
+//no of arguement check is there any duplicate present or not
+//areThreeDuplicate(1,2,3)//false
+//areThreeDuplicate(1,2,2)//true
+
+function areThreeDuplicate(...num){
+    let n={};
+    for(let i of num){
+        n[i]= ++n[i] || 1;
+    }
+    for(let j in n){
+        if(n[j]>1){
+            return true
+        }
+    }
+    return false;
+}
+console.log(areThreeDuplicate(1,2,2))
+console.log(areThreeDuplicate(1,2,3))

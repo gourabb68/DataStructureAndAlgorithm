@@ -1,0 +1,45 @@
+//implement quick sort 
+
+function pivot(arr, start=0,end= arr.length-1){
+        let pivot = arr[start];
+        let pivIndx = start;
+        for(let i=start+1;i<arr.length;i++){
+            if(pivot>arr[i]){
+                pivIndx++
+                [arr[i],arr[pivIndx]]=[arr[pivIndx],arr[i]]
+            }
+        }
+         [arr[start],arr[pivIndx]]=[arr[pivIndx],arr[start]]       
+         return pivIndx;
+} 
+
+
+
+function quickSort(arr, left=0,right=arr.length-1){
+    if(left<right) {   
+        let pivotIndx = pivot(arr,left,right);
+        //left
+         quickSort(arr,left,pivotIndx-1)
+         //right
+         quickSort(arr,pivotIndx+1,right)
+    }
+    return arr;
+
+}
+
+console.log(quickSort([10,24,12,18,35,5,76,1]))
+
+
+// //consider array  [10,24,5,76,1]
+//                 [10,24,5,76,1] 
+// pivot = 10      [10,24,5,76,1]    //compare index=1 ,24 and pivot pivot < 24 no change
+// pivotIndx=0     [10,5,24,76,1]    //compare index=2, 10 and pivot pivot > 5 so increase pivotIndx =1 swap 24 and 5
+//                 [10,5,24,76,1]    //compare index=3 ,76 and pivot pivot > 76 no change  
+//                 [10,5,24,76,1]    //compare index=4, 1 and pivot pivot > 1 so increase pivotIndx =2 swap 24 and 1
+//                 [10,5,1,76,24]    // index reached to end
+//                 [1,5,10,76,24]    // so swap pivot index element 1 and first pivot element 10
+
+// // so pivot index returned pivotIndx = 2 
+// //do the same in the left hand side [1,5] //already sorted
+// // do the same in the left hand side [76,24]               
+// //finally received [1,5,10,24,76]

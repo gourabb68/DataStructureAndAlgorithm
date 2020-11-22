@@ -1,0 +1,16 @@
+// function sortJs(arr){
+//     //ascending
+//     return arr.sort((a,b)=>{return (a-b)});
+//     // a-b => 2-10 negative so 2 will come first then 10
+// }
+
+function sortJs(arr){
+    //descending
+    return arr.sort((a,b)=>{return (b-a)});
+    // b-a => 10-2 positive so 10 will come first then 2
+}
+
+
+console.log(sortJs([2,10,15,8,1,23,5]))
+
+// console.log(sortJs(['hi','ai','lo','co']))

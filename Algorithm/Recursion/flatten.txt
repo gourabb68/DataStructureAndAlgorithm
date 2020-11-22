@@ -1,0 +1,20 @@
+// write a recursive called flatten which accepts an array 
+// of arrays and return a new array with all value flattened
+//flatten([1,2,3,[4,5]])//[1,2,3,4,5]
+//flatten([1,[2,[3,[4,[5]]]]])//[1,2,3,4,5]
+let a=[];
+function flatten(array){    
+     if(array[0].length!==undefined) flatten(array[0])
+     if(array.length===1) {
+        return array[0]       
+         } 
+         else{
+            a.push(array[0]);
+            return array[0].concat(flatten(array.slice(1)))
+         }
+  
+
+}
+
+console.log(flatten([1,2,3,[4,5]]))
+console.log(flatten([1,[2,[3,[4,[5]]]]]))

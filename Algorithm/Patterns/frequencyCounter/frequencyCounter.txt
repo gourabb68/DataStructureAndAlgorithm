@@ -1,0 +1,21 @@
+//two array will be provided 2nd one will have square
+// of all first array element order not matter i.e.[1,2,3] and [4,9,1]
+//if 2nd array contains all the square value then return true else false
+//[1,2,3] and [4,9,1] true ... [1,2,3] and [4,9] false
+function same(arr1,arr2){
+    if(arr1.length !== arr2.length){
+        return false;
+    }
+    let index;
+    for (let i; i<arr1.length;i++){
+        index = arr2.indexOf(arr1[i]*arr1[i]);
+        if(index === -1){
+            return false;
+        }
+        arr2.splice(index,1)
+    }
+    return true;
+
+}
+console.log(same([1,2,3], [4,9,1]));
+console.log(same([1,2,3], [4,9,]));

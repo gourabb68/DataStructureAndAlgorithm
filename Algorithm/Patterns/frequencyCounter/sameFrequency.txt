@@ -1,0 +1,31 @@
+//write a function called sameFrequency. Given two positive integer.
+// find out if both have same frequency or not.
+//sameFrequency(182,281)//true
+
+function sameFrequency(num1,num2){
+    let n1={},n2={},digit=0;
+    let temp=num1;
+    while(num1){
+        digit = num1%10;
+        n1[digit] = ++n1[digit] || 1;
+        num1=Math.floor(num1/10);
+    }
+        
+     while(num2){
+        digit = num2%10;
+        n2[digit] = ++n2[digit] || 1;
+        num2=Math.floor(num2/10);
+    }
+
+    console.log(n1)
+    console.log(n2)
+    for(i in n1){
+        if(n1[i]!==n2[i]) return false;
+
+    }
+    return true;
+
+
+}
+
+console.log(sameFrequency(18526578,25876851))

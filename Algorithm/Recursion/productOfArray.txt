@@ -1,0 +1,8 @@
+//write a function called productOfArray which takes 
+//an array and return product of array using Recursion
+function productOfArray(arr){
+    if (arr.length===0) return  1;
+    return arr[0] * productOfArray(arr.slice(1));
+}
+
+console.log(productOfArray([2,4,5,1,2]))

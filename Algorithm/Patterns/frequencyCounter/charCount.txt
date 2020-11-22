@@ -1,0 +1,22 @@
+//Write a function which takes in a string and returns
+ //counts of each character in the string
+
+ function charCount(str){
+     //declare return object
+     let result={};
+     //loop over input string
+     for(char of str){       
+     //if char is number/letter AND return object has that key then incraese count of value or assign 1
+        if(/[A-Za-z0-9]/.test(char)){
+           result[char]= ++result[char] || 1;
+        }
+ 
+     //if char is something(space,special symbols etc) then do nothing
+     }
+     //return the final object
+     return result;
+
+ }
+console.log(charCount("hello"));
+console.log(charCount("hi hello"))
+console.log(charCount("hi 123"))

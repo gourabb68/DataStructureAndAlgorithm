@@ -1,0 +1,21 @@
+function binarySearch(arr,n){
+   let middle=0;
+   let min =0;
+   let max=arr.length-1;
+   while(arr[middle]!==n && min<=max){
+       middle = Math.floor((min+max)/2);
+       if(arr[middle]<n){
+           min=middle+1;
+       }
+       else if(arr[middle]>n){
+           max=middle-1;
+       }
+       else{
+           return middle;
+       }
+
+   }
+        return -1;
+}
+
+console.log(binarySearch([1,2,3,5,7,9],5))

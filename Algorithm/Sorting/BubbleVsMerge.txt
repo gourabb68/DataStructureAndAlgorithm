@@ -1,0 +1,69 @@
+//check who is fast bubble vs merge (qudratic vs others like O(nlogn) , O(logn))
+
+function bubbleSort(a){
+    let temp=0;
+    for(let i=0;i<a.length;i++){
+        //loop through array i =0 to length of the array
+        for(let j=0;j<a.length-i;j++){
+            //loop j =0 to length of array -1 as in each pass 
+            //we are sorting data from right side
+            if(a[j]>a[j+1]){
+//                 console.log("array: " + a + "swap pair: "+ a[j] +' <-> '+ a[j+1])
+                temp = a[j+1];
+                a[j+1]=a[j];
+                a[j]=temp;
+
+            }
+        }
+//         console.log(i+1 +" pass is Completed")
+    }
+    return a;
+}
+
+function merge(a1,a2){
+   let result = [];
+   let i=0,j=0;
+   while(i<a1.length && j<a2.length){
+       if(a1[i]<a2[j]){
+           result.push(a1[i])
+           i++;
+           
+       }else{
+           result.push(a2[j])
+           j++;
+       }
+   }
+   while(i<a1.length){
+       result.push(a1[i])
+       i++;
+       
+   }
+    while(j<a2.length){
+       result.push(a2[j])
+       j++;
+   }
+   
+    return result;
+
+}
+
+function mergeSort(arr){
+    if(arr.length<=1) return arr;
+    let mid = Math.floor(arr.length/2);
+    let left  = mergeSort(arr.slice(0,mid));
+    let right = mergeSort(arr.slice(mid));
+    return merge(left,right)
+}
+
+
+
+
+
+
+
+//gives array of length 100000
+let data  = Array.apply(null, {length: 100000}).map(Function.call, Math.random)
+let t1 = performance.now();
+console.log(mergeSort(data));  ///calling bubble sort  for 100000 element in array
+let t2 = performance.now();
+console.log("time taken " + (t2-t1)/1000 + "sec")

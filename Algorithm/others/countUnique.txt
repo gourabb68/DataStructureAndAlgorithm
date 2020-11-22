@@ -1,0 +1,20 @@
+//write a function which will take a sorted array and will return no of unique no.
+function countUnique(arr){
+let j = 1;
+let i=0,k=0;
+while (i<=arr.length-1){
+    if(arr[i]===arr[j]){
+        i++;
+        j++;
+    }else if(arr[i]!==arr[j]){
+     k++;
+     i++;
+     j++;
+    }
+   
+}
+return k;
+
+}
+let x = countUnique([1,1,1,2,3,3,4,4,5,7,7,8,9]);
+console.log(x)

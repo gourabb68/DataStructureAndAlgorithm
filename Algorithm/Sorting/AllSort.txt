@@ -1,0 +1,158 @@
+function bubbleSort(a){//bubble
+    let swap;
+    for(let i=0;i<a.length;i++){
+        swap=false;
+        for(let j=0;j<a.length-i;j++){
+            if(a[j+1]<a[j]){
+                [a[j+1],a[j]] = [a[j],a[j+1]];
+                swap =true;
+            }
+        }
+        if(!swap) break;      
+    }
+    return a;
+}
+
+function selectionSort(a){//selection sort
+   let min;
+    for(let i=0;i<a.length;i++){
+       min =i;
+
+        for(let j=i+1;j<a.length;j++){            
+            if(a[min]>a[j]){
+                min =j;
+            }      
+        }
+        if(i!==min) {
+            [a[min],a[i]] = [a[i],a[min]]
+        }
+       
+    }
+    return a;
+}
+
+
+function insertionSort(a){//insertion sort
+   let key;
+    for(let i=1;i<a.length;i++){
+       key =a[i];
+
+        for(var j=i-1;j>=0 && a[j]>key;j--){
+           
+           a[j+1] = a[j];
+          
+            }
+            
+        if(a[i] != key){
+          a[j+1] =key;   
+         
+        }
+  
+    }
+    return a;
+}
+
+
+function merge(arr1,arr2){
+    let result=[];
+    let i=0,j=0;
+    while(i<arr1.length && j<arr2.length){
+        if(arr1[i]<arr2[j]){
+            result.push(arr1[i]);
+            i++;
+        }else{
+            result.push(arr2[j]);
+            j++;
+        }
+    }
+    while(i<arr1.length){
+        result.push(arr1[i]);
+        i++;
+    }
+     while(j<arr2.length){
+        result.push(arr2[j])
+        j++;
+    }
+    return result;
+}
+
+
+function mergeSort(arr){
+    if(arr.length<=1) return arr
+    let mid =Math.floor(arr.length/2);
+    let left = mergeSort(arr.slice(0,mid));
+    let right = mergeSort(arr.slice(mid));    
+    return merge(left,right);
+
+}
+
+// pivot helper method
+function pivot(arr,start=0,end=arr.length-1){
+    let pivot = arr[0];
+    let pivotInd = 0;
+    for(let i=start+1;i<arr.length;i++){
+        if(pivot>arr[i]){
+            pivotInd++;
+            [arr[pivotInd],arr[i]] =[arr[i],arr[pivotInd]]
+        }
+    }
+    if(pivot!==arr[pivotInd])
+    {
+
+      [arr[pivotInd],arr[start]] =[arr[start],arr[pivotInd]]
+    }
+     return pivotInd
+    
+}
+
+function quickSort(a,left=0,right=a.length-1){
+    if(left<right){
+        let piv = pivot(a);
+        left = quickSort(a,left,piv-1)
+        right = quickSort(a,piv+1,right)
+    }
+    return a;
+}
+
+
+function getDigit(num,pos){
+    return  Math.floor(Math.abs(num)/Math.pow(10,pos))%10;
+}
+
+function digitCount(num){
+    if(num===0) return 1;
+    return Math.floor(Math.log10(Math.abs(num))) +1;
+}
+
+function mostDigit(arr){
+    let maxDigit = digitCount(arr[0]);
+    for(let i=1;i<arr.length;i++){
+    let digit = digitCount(arr[i]);
+        if(maxDigit<digit){
+            maxDigit = digit;
+        }
+    }
+    return maxDigit;
+
+}
+
+function radixSort(arr){
+    let maxDigit = mostDigit(arr);
+    for(let i=0;i<maxDigit;i++){
+        //creating bucket
+        let digitBucket = Array.from({length: 10},()=>[]);
+        for(let j=0;j<arr.length;j++){
+            let getdigit = getDigit(arr[j],i);
+            digitBucket[getdigit].push(arr[j]);
+        }
+        arr = [].concat(...digitBucket)
+    }
+    return arr;
+}
+
+console.log("bubbleSort "+ bubbleSort([17,11,5,20,12]));
+console.log("selectionSort "+selectionSort([17,11,5,20,12]));
+console.log("insertionSort "+insertionSort([17,11,5,20,12]));
+console.log("mergeSort "+mergeSort([17,11,5,20,12]))
+console.log("quickSort "+quickSort([17,11,5,20,12]));
+console.log("radixSort "+radixSort([21542,255,6,3,52,158881,16161,31]))

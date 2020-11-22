@@ -1,0 +1,15 @@
+//write a  function to find a string is palindrome or not
+//palindrome('tacocat')//true
+
+
+function palindrome(str){
+    function palim(str){
+         if (str.length===1) return str[str.length-1]
+          return str[str.length-1].concat(palim(str.slice(0,str.length-1)))
+    }
+   if(str == palim(str)) return true;
+   else return false;
+   
+}
+
+console.log(palindrome("tacocat"));

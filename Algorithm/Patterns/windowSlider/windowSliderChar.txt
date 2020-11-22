@@ -1,0 +1,25 @@
+//write a function which will take a string and will return long unique char sequence
+// hellothere here long unique cha r seq is lother
+function windowSlideChar(str){
+if(!str) return null;
+let uniqueStr ='',temp=[],max=0,final=0;
+for(let i=0;i<str.length;i++){
+    if(str[i]!==str[i+1]){
+        uniqueStr = uniqueStr.concat(str[i]);
+        if(i===str.length-1) temp.push(uniqueStr);
+    }else{
+         uniqueStr = uniqueStr.concat(str[i]);
+         temp.push(uniqueStr);
+         uniqueStr ='';
+    }
+}
+for(let i=1;i<temp.length;i++){
+    max = temp[i-1].length> temp[i].length?  i-1:  i;
+    final = max>final? max:final;
+}
+return temp[final];
+
+}
+
+console.log(windowSlideChar('aabcddefgghlecg'));
+console.log(windowSlideChar('hellothere'));

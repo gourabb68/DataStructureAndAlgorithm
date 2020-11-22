@@ -1,0 +1,27 @@
+//implement Math.pow() using recursion 
+//calculate power of a no 
+//power(2,3)//8
+//power(2,0)//1
+
+function power(num,pow){
+
+if(pow===0) return 1;
+return num * power(num,pow-1)
+
+}
+console.log(power(2,20))
+
+//   num * power(num,pow-1)
+//   2 * power(2,2)
+//         2 * power(2,1)
+//                 2 * power(2,0)
+//                      1
+// 2 * power(2,2)
+//         2 * power(2,1)
+//                 2 * 1
+//
+// 2 * power(2,2)
+//         2 * 2 * 1
+//
+// 2 * 2 * 2 * 1
+//   8

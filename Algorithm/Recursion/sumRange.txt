@@ -1,0 +1,41 @@
+// //using recursion calculate sum of a given range
+function sumRange(n){
+ if(n==1) return 1;
+ return n+ sumRange(n-1);
+}
+let t1 = performance.now();
+console.log(sumRange(5))
+let t2 = performance.now();
+console.log("time taken " + (t2-t1)/1000 + "sec")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//using iteration 
+// function sumRange(n){
+//     let sum =0
+//     for(let i=1;i<=n;i++){
+//         sum = sum +i;
+//     }
+//     return sum
+// }
+// let t1 = performance.now();
+// console.log(sumRange(11430))
+// let t2 = performance.now();
+// console.log("time taken " + (t2-t1)/1000 + "sec")

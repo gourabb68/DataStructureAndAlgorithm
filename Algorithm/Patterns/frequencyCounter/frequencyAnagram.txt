@@ -1,0 +1,26 @@
+// write a function which will take two string will determine if the second string is an anagram of the first.
+function anagram(str1,str2){
+
+    if(str1.length !== str2.length)
+    {
+        return false;
+    }
+    let count1={};
+    let count2={};
+    for(var i of str1){
+        count1[i] =++count1[i] || 1;
+    }
+      for( var i of str2){
+        count2[i] =++count2[i] || 1;
+    }
+    for(var i of str1)
+    {
+        if(!(count1[i] === count2[i])){
+            return false;
+        }
+    }
+    return true;
+}
+
+console.log(anagram('aaz','aza'))
+console.log(anagram('aaz','zaz'))
