@@ -1,0 +1,225 @@
+//creating node class 
+class Node {
+    constructor(val){
+        this.val = val;
+        this.next = null;
+    }
+}
+
+//creating SingleLinkList class will have all the method like push pop etc
+class SingleLinkList {
+    constructor(){
+         this.head = null;
+         this.tail = null;
+         this.length = 0;
+    }
+    //*** push method ****// adding in last
+    push(val){
+        //create a new node
+        let newNode = new Node(val);
+
+        //check first element or not
+        if(this.head === null){            
+            this.head =newNode;
+            this.tail =this.head;        
+        }
+      
+        //check  element already there or not
+          else {                     
+                this.tail.next =newNode; // adding new node next to previous node
+                this.tail = newNode;  // asigning last node to tail             
+          }
+            this.length++;
+            return this;
+    }
+
+    //*** pop method ****// remove from last
+    pop(){        
+        if(!this.head) return undefined;
+        //check single element is deleted or not
+        if(this.head===this.tail){
+            this.head=null;
+            this.tail =null;
+        }
+        else{        
+            let current = this.head;
+            let preTail =current; 
+            while(current.next){ //traversing to find 2nd last node
+                preTail = current;
+                current = current.next;
+            }        
+            this.tail =  preTail;
+            this.tail.next =null;     
+        }   
+        
+        this.length--;
+        return this;          
+    }
+    
+      //*** shift method ****// remove a new node from first
+    shift(){
+         if(!this.head) return undefined; 
+         let current =this.head;
+         if(this.head===this.tail){
+            this.head=null;
+            this.tail =null;
+        }
+        else{            
+            this.head = this.head.next;
+            current = null;
+            
+        }
+            this.length--;
+            return this;
+ 
+    }
+
+     //*** unshift method ****// add a new node from first
+    unshift(val){
+         let newNode = new Node(val);
+          //if no element
+         if(!this.head) {
+            this.head =newNode;
+            this.tail =this.head;   
+         }
+         else{
+              let current =this.head;
+             this.head = newNode;
+             this.head.next = current;           
+         }
+            this.length++;
+            return this;
+ 
+    }
+
+ //*** get method ****// return node in given position i.e. index
+    get(index){
+        if(index<0 || index>=this.length) return undefined;
+         if(!this.head) return undefined; 
+        let current =this.head;
+        let counter =0;
+        while(counter!=index){
+            current = current.next;
+            counter++;
+            }        
+        return current;
+    }
+
+//*** set method ****// update value of node in a given index 
+    set(index,val){
+        if(index<0 || index>=this.length) return undefined;
+        if(!this.head) return undefined;
+        let current =this.head;
+        let counter =0;
+        while(counter!=index){
+            current = current.next;
+            counter++;
+            }  
+        current.val = val;
+        return current;    
+    }
+
+//*** insert method ****//insert a new node in a given index 
+    insert(index,val){
+         if(index<0 || index>this.length) return false;
+         if(index===this.length)  //no element 
+         {
+             return !!this.push(val);
+         };
+         if(index===0){//add at the begining
+             return !!this.unshift(val);
+         }
+         let newNode = new Node(val);
+         if(!this.head) {//no element 
+             this.node= newNode;
+             this.tail = newNode;
+         }
+         else{
+             let counter =0;
+             let current =this.head;
+             let preCurrent = current;             
+             while(counter!=index){
+                preCurrent= current;
+                current = current.next;
+                counter++;
+              }  //or  preCurrent = this.get(index-1);
+              newNode.next=current; 
+              preCurrent.next=newNode;
+         }
+         
+          this.length++;
+          return true;
+    }
+
+
+    //*** remove method ****//remove a new node in a given index 
+    remove(index){
+          if(index<0 || index>this.length) return false;
+          if(index===this.length) return !!this.pop();
+          if(index===0) return !!this.shift();
+          let current = this.head;
+          let preCurrent = current;
+          let counter =0;
+          while(counter!==index){
+              preCurrent =current;
+              current = current.next;
+              counter++;
+          }
+          preCurrent.next = current.next;
+          current = null;
+          this.length--;
+          return true;
+
+    }
+
+     //*** reverse method ****//reverse entire link list  
+     reverse(){
+         if(!this.head) return undefined;
+         //if single element then already reverse 
+         //if more element 
+         let node = this.head;
+         this.head = this.tail;
+         this.tail = node;
+         let prev = null, next;         
+         for(let i=0; i<this.length;i++){
+            next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+         }
+         return this;
+
+     }
+}
+
+let  firstName = new Node('hi');
+
+//we can add node like this but not a good way
+//  firstName.next = new Node('there');
+//  firstName.next.next = new Node('How');
+//  firstName.next.next = new Node('How');
+//  firstName.next.next.next = new Node('are');
+
+
+//we will have all method available in SingleLinkList class
+ let list = new SingleLinkList();
+ list.push('gourab');
+ list.push('banerjee');
+ list.push('poto');
+//  list.head
+// Node {val: "gourab", next: Node}
+// list.head.next
+// Node {val: "banerjee", next: null}
+// list.head.next.next
+// null
+
+
+
+// list.pop()
+// list.shift()
+// list.unshift(25)
+//list.get(1);
+//list.set(1,'jio')
+//list.insert(1,'kio')
+// list.insert(1)
+//list.reverse();
