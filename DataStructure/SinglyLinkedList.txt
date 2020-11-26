@@ -1,10 +1,11 @@
-//creating node class 
+//creating node class contains two property value i.e. val and next pointer
 class Node {
     constructor(val){
         this.val = val;
         this.next = null;
     }
 }
+
 
 //creating SingleLinkList class will have all the method like push pop etc
 class SingleLinkList {
@@ -32,6 +33,7 @@ class SingleLinkList {
             this.length++;
             return this;
     }
+    
 
     //*** pop method ****// remove from last
     pop(){        
@@ -155,7 +157,7 @@ class SingleLinkList {
     //*** remove method ****//remove a new node in a given index 
     remove(index){
           if(index<0 || index>this.length) return false;
-          if(index===this.length) return !!this.pop();
+          if(index===this.length-1) return !!this.pop();
           if(index===0) return !!this.shift();
           let current = this.head;
           let preCurrent = current;
@@ -194,7 +196,7 @@ class SingleLinkList {
 
 let  firstName = new Node('hi');
 
-//we can add node like this but not a good way
+// //we can add node like this but it's not a good way
 //  firstName.next = new Node('there');
 //  firstName.next.next = new Node('How');
 //  firstName.next.next = new Node('How');
@@ -202,10 +204,12 @@ let  firstName = new Node('hi');
 
 
 //we will have all method available in SingleLinkList class
- let list = new SingleLinkList();
- list.push('gourab');
- list.push('banerjee');
- list.push('poto');
+ let list = new SingleLinkList(); 
+ list.push('how');
+ list.push('are');
+ list.push('you?');
+
+ 
 //  list.head
 // Node {val: "gourab", next: Node}
 // list.head.next
