@@ -1,0 +1,181 @@
+//creating Node class
+class Node{
+    constructor(val){
+        this.val = val;
+        this.next =null;
+        this.prev = null;
+    }
+}
+
+//creating DoublyLinkedList class 
+class DoublyLinkedList {
+    constructor(){
+        this.length =0;
+        this.head = null;
+        this.tail = null;
+    }
+
+    //push operation: adding new node from last
+    push(val){
+        let newNode = new Node(val);
+        //check empty list or not
+        if(!this.head){
+            this.head = newNode;
+            this.tail = this.head;            
+        }else{
+            newNode.prev = this.tail;
+            this.tail.next = newNode;
+            this.tail = newNode;
+
+        }
+        this.length++;
+        return this;        
+    }
+
+    //pop operation: removing one node from last
+    pop(){
+        //check empty list
+        if(!this.head) return undefined;
+        //check single element
+        if(this.head===this.tail){
+             this.head = null;
+             this.tail = null;
+        }else{
+            let temp = this.tail.prev;
+            this.tail.prev.next = null;
+            this.tail = temp;
+        }
+        this.length--;
+        return this;
+    }
+
+    //shift operation: removing one node from beginning
+    shift(){
+        let oldHead = this.head;
+        //check empty list
+        if(!this.head) return undefined;
+        //check single element
+        if(this.head===this.tail){
+            this.head=null;
+            this.tail=null;
+        }
+        else{            
+            this.head = this.head.next;
+            this.head.prev =null;
+            oldHead.next=null;
+        }
+        this.length--;
+        return this;
+    }
+    //unshift operation: adding one node from beginning
+    unshift(val){
+        let newNode = new Node(val);
+        //check empty list
+       if(!this.head){
+           this.head = newNode;
+           this.tail = newNode;
+       }else{
+           let oldHead = this.head;
+           this.head = newNode;
+           newNode.next = oldHead;
+           oldHead.prev = newNode;
+       }
+       this.length++;
+       return this;
+    }
+
+    //get operation: accessing a node in DLL by its position or index
+    get(index){
+        //check if index > length 
+        if(index<0 || index >=this.length) return undefined;
+        //at pos 0
+        if(index===0)return this.head;
+        //at last position
+        if(index===this.length-1) return this.tail;
+        let counter =0;
+        let current = this.head;
+        while(counter!==index){
+            current = current.next;
+            counter++;
+        }
+        return current;
+
+    }
+
+    //set operation: updating value a node in DLL by its position or index
+    set(index,val){
+        //check if index > length 
+        if(index<0 || index >=this.length) return false;
+        let counter =0;
+        let current = this.head;
+        while(counter!==index){
+            current = current.next;
+            counter++;
+        }
+        current.val = val;
+        return true;
+
+    }
+
+    //insert operation: adding a new node in DLL in a given position
+    insert(index,val){
+       //check if index is valid or not 
+        if(index<0 || index >this.length) return false;
+        //check empty list or not
+        if(!this.head || index===this.length-1) return !!this.push(val);            
+        if(index===0) return  !!this.unshift(val);   
+            let newNode = new Node(val);
+            let beforeNode = this.get(index-1);
+            let afterNode = beforeNode.next;
+            beforeNode.next = newNode;
+            newNode.prev = beforeNode;
+            newNode.next = afterNode;
+            afterNode.prev = beforeNode;
+            this.length++;
+            return true;
+    }
+
+     //remove operation: removing a node in DLL in a given position
+    remove(index){
+          //check if index is valid or not  
+        if(index<0 || index >=this.length) return undefined;
+        //check empty list or not
+        if(index===this.length-1) return this.pop();            
+        if(index===0) return  this.shift();             
+            let removeNode = this.get(index);
+            removeNode.prev.next = removeNode.next;
+            removeNode.next.prev = removeNode.prev;
+            removeNode.next =null; 
+            removeNode.prev =null;
+            this.length--;
+            return removeNode;
+    }
+
+    //reverse operation: reverse the entire list
+    reverse(){
+        //check empty 
+        if(!this.head) return undefined;
+        //check single item
+        if(this.head===this.tail) return this.head;
+        let temp;
+        temp= this.head;
+        this.head=this.tail;
+        this.tail = temp;
+        let prevNode=null,current=temp;
+        while(current!==null){
+           current.prev = current.next;
+           current.next = prevNode;
+           prevNode = current;
+           current = current.prev;
+        }
+        return this;
+    }
+
+}
+
+
+let list = new DoublyLinkedList();
+// list.push(5);
+// list.push(10);
+// list.push(15);
+
