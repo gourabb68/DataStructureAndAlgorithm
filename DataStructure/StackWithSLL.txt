@@ -1,0 +1,59 @@
+//creating Node
+class Node{
+    constructor(value){
+        this.value = value;
+        this.next =null;
+    }
+}
+
+//creating class Stack 
+
+class Stack{
+    constructor(){
+        this.first = null;
+        this.last = null;
+        this.size = 0;
+    }
+    
+    //push operation: adding element at the top
+    push(value){
+        let newNode = new Node(value);
+        //check no node
+        if(!this.first){
+            this.first = newNode;
+            this.last=newNode;
+        }
+        else{
+            let temp = this.first;
+            this.first = newNode;
+            this.first.next = temp;
+        }
+        this.size++;
+        return this.size;
+    }
+
+    //pop operation: deleting element at the top
+    pop(){
+        //check if no element
+        if(!this.first) return undefined;
+        //check single element
+        if(this.first === this.last) {
+            this.first = null;
+            this.last = null;            
+        }
+        else{
+            let temp = this.first;
+            this.first= this.first.next;
+            temp = null
+
+        }
+        this.size--;
+        return this.size;
+    }
+}
+
+let stack = new Stack();
+// stack.push('FIRST');
+// stack.push('SECOND');
+// stack.push('THIRD');
+// stack.pop();
