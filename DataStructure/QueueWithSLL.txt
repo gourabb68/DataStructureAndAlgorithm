@@ -1,0 +1,55 @@
+//creating Node
+class Node{
+    constructor(value){
+        this.value = value;
+        this.next =null;
+    }
+}
+
+//creating class Queue 
+
+class Queue{
+    constructor(){
+        this.first = null;
+        this.last = null;
+        this.size = 0;
+    }
+
+    //Enqueue operation: adding element at the last 
+    enqueue(value){
+        let newNode =new Node(value);
+        //check empty queue
+        if(!this.first) {
+            this.first = newNode;
+            this.last = newNode;
+        }
+        else{
+            this.last.next = newNode;
+            this.last = newNode;
+        }
+        return ++this.size;
+    }
+
+    //dequeue operation: removing element from first
+    dequeue(){
+        //check empty queue
+        if(!this.first) return undefined;
+         let temp = this.first;
+        //check single element
+        if(this.first===this.last) {
+            this.first = null;
+            this.last = null;
+        }
+        else{           
+            this.first = this.first.next;           
+        }
+        this.size--;
+        return temp.value;
+    }
+}    
+
+let queue = new Queue();
+// queue.enqueue(2)
+// queue.enqueue(22)
+// queue.enqueue(222)
+//queue.dequeue();
