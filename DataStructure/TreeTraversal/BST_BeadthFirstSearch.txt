@@ -1,0 +1,99 @@
+class Node {
+    constructor(value){
+       this.value = value;
+       this.left = null;
+       this.right = null;
+    }
+}
+
+
+class BinarySearchTree {
+    constructor(){
+        this.root = null;
+    }
+
+    //Insert Operation: adding node into right places i.e. make tree sorted
+    insert(value){
+        let newNode = new Node(value);
+        //check tree is empty or not
+        if(!this.root) {
+            this.root = newNode;
+        }
+        else{
+            let current = this.root;
+            while(true){
+                if(current.value=== value) return undefined;
+                if(value<current.value){
+                    if(current.left === null) //check if left node is not present
+                    {
+                        current.left = newNode;
+                        return this;
+                    }
+                    else{
+                        current = current.left;
+                    }
+                }
+                 if(value>current.value){
+                    if(current.right === null)
+                    {
+                        current.right = newNode;
+                        return this;
+                    }
+                    else{
+                        current = current.right;
+                    }
+                }
+            }
+        }       
+    }
+      //find Operation: find node from BST
+    find(value){
+        if(!this.root) return false;
+        else{
+            let current = this.root;
+            let found = false;
+            while(!found && current){
+                if(!current) return undefined;
+                if(current.value===value) return current;
+                if(value<current.value){                
+                        current =  current.left;
+                }
+                else if(value>current.value){
+                        current =  current.right;
+                 }
+                else {
+                    found =true;
+                }
+            }
+            if(!found) return undefined;
+            return current;
+        }
+    }
+
+    //BFS Traversal
+    BFS(){
+        let data =[];
+        let queue=[];
+        queue.push(this.root);
+        while(queue.length!==0){
+            let node = queue.shift();
+            data.push(node.value);
+            node.left ? queue.push(node.left):1;
+            node.right ? queue.push(node.right):1;
+        }
+
+        return data;
+    }
+}
+
+var tree = new BinarySearchTree();
+
+
+tree.insert(15)
+tree.insert(12)
+tree.insert(6)
+tree.insert(50)
+tree.insert(18)
+tree.insert(25)
+tree.insert(1);
+tree.BFS();
