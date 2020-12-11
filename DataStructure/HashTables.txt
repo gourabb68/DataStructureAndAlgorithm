@@ -1,0 +1,94 @@
+//implement hash table
+
+//create hash table class
+class HashTable{
+    constructor(size=3){
+        this.keyMap = new Array(size); //initially return blank array of length size
+    }
+
+    //hashing function
+    hash(key){
+        let total =0;
+        let WEIRED_PRIME = 31;//for  removing collison
+        let value;
+        for(let i=0;i<Math.min(key.length,100);i++){
+            char = key[i]
+            value = char.charCodeAt(0) -96;
+            total = (total + WEIRED_PRIME+ value ) % this.keyMap.length;
+        }
+        return total;
+    }
+    
+
+    //insert/set operation with separate chaining
+    set(key,value){
+        //get hash value of key
+        let index=this.hash(key);
+        //check index is empty or not
+        if(!this.keyMap[index]){//empty
+            this.keyMap[index] = [] ;  
+        }
+        this.keyMap[index].push([key,value])
+    }
+
+    //get operation with separate chaining
+    get(key){
+        let index = this.hash(key);
+        //check if more element in same index
+        if(this.keyMap[index]){
+            for(let i=0;i<this.keyMap[index].length;i++){
+                if(this.keyMap[index][i][0]===key){
+                    return this.keyMap[index][i];
+                }
+            }
+        }
+        return undefined;//if no element found
+    }
+
+
+     //values opration: get all the valus
+    values(){
+        let valuesArr=[];
+        if(!this.keyMap)return undefined;
+        for(let i=0;i<this.keyMap.length;i++){
+            if(this.keyMap[i]){
+                for(let j=0;j<this.keyMap[i].length;j++){
+                    //check for duplicate data
+                    if(!valuesArr.includes(this.keyMap[i][j][1])){
+                         valuesArr.push(this.keyMap[i][j][1])
+                    }
+                   
+                }
+            }
+        }
+        return valuesArr;
+        
+    } 
+
+    //keys opration: get all the key
+    keys(){
+        let keyArr=[];
+        if(!this.keyMap)return undefined;
+         if(!this.keyMap)return undefined;
+        for(let i=0;i<this.keyMap.length;i++){
+            if(this.keyMap[i]){
+                for(let j=0;j<this.keyMap[i].length;j++){
+                    //check for duplicate data
+                    if(!keyArr.includes(this.keyMap[i][j][0])){
+                         keyArr.push(this.keyMap[i][j][0])
+                    }
+                   
+                }
+            }
+        }
+        return keyArr;
+    }
+}
+
+let ht = new HashTable();
+
+ht.set('hello',52);
+ht.set('pink',22);
+ht.set('red',72);
+ht.set('black',82)
+ht.set('hello',52)

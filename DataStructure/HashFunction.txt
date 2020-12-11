@@ -1,0 +1,25 @@
+// function hash(key,arrayLen){
+//     let total =0;
+//     let value;
+//     for(char of key){
+//         value = char.charCodeAt(0) -96; //getting numeric value of each character
+//         total = (total + value ) % arrayLen;
+//     }
+//     return total;
+// }
+
+//improving hash function
+function hash(key,arrayLen){
+    let total =0;
+    let WEIRED_PRIME = 31;//for  removing collison
+    let value;
+    for(let i=0;i<Math.min(key.length,100);i++){
+        char = key[i]
+        value = char.charCodeAt(0) -96;//getting numeric value of each character
+        total = (total + WEIRED_PRIME+ value ) % arrayLen;
+    }
+    return total;
+}
+
+hash('pink',53)
+hash('cyan',53)
