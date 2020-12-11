@@ -1,0 +1,90 @@
+//implement priority queue with Min Binary Heap with list : each parent node has value lesser than its child node
+
+class Node {
+    constructor(val,priority){
+        this.val = val;
+        this.priority=priority;
+//         this.insertTime = Date.now();
+    }
+}
+
+class PriorityQueue {
+    constructor(){
+        this.value = [];
+    }
+
+    //put the value in right place to make max heap
+    bubbleUp(){
+       let idx = this.value.length-1; //index of last element just pushed
+       let element  = this.value[idx]; //value of last element just pushed
+       while(idx>0){
+           let parentIdx = Math.floor((idx-1)/2); //getting parent index
+           let parent = this.value[parentIdx]; //getting parent value
+           if(element.priority>=parent.priority) break; //if already a heap
+           this.value[parentIdx] = element;
+           this.value[idx] = parent;
+           idx = parentIdx
+       }
+
+    }
+    //adding element 
+    enqueue(value,priority){
+        let newNode = new Node(value,priority);
+         this.value.push(newNode);
+         this.bubbleUp();
+         return this.value;
+
+    }
+
+    //after removing max element and swapping with first we need to make 
+    //structure it as heap
+    sinkDown(){
+        let idx = 0;
+        const length = this.value.length;
+        let element =this.value[0];
+        while(true){
+            let leftChildIdx = 2*idx + 1;
+            let rightChildIdx = 2*idx + 2;
+            let leftChild,rightChild;
+            let swap=null;
+            
+            if(leftChildIdx<length){//check rightChild present ot not
+                leftChild = this.value[leftChildIdx];
+                if(leftChild.priority<element.priority){
+                    swap = leftChildIdx;
+                }
+            }
+
+            if(rightChildIdx<length){//check left child present or not
+                rightChild = this.value[rightChildIdx];
+                if((swap===null && rightChild.priority<element.priority) || (swap!==null && rightChild.priority<leftChild.priority)){
+                    swap = rightChildIdx;
+                }
+            }
+
+            if(swap===null) break;
+            this.value[idx] = this.value[swap];
+            this.value[swap] = element;
+            idx = swap;
+        }
+    }
+    //extract the top min item and make it heap again
+    dequeue(){
+        let min = this.value[0];
+        let end = this.value.pop();
+        if(this.value.length>0){
+            this.value[0] = end;
+            this.sinkDown();
+        }
+        
+        return min;
+    }
+}
+let hospt = new PriorityQueue();
+hospt.enqueue('comman cold',5)
+hospt.enqueue('high fever cold',4);
+hospt.enqueue('pregnent',2);
+hospt.enqueue('accident emergency',1);
+
+///we can make one modification like if has same priority then
+//we can check date time like which one has inserted at first

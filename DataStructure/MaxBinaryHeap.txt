@@ -1,0 +1,76 @@
+//implement Max Binary Heap with array : each parent node has value greater than its child node
+
+class BinaryHeap {
+    constructor(){
+        this.value = null;
+    }
+
+    //put the value in right place to make max heap
+    bubbleUp(){
+       let idx = this.value.length-1; //index of last element just pushed
+       let element  = this.value[idx]; //value of last element just pushed
+       while(idx>0){
+           let parentIdx = Math.floor((idx-1)/2); //getting parent index
+           let parent = this.value[parentIdx]; //getting parent value
+           if(element<=parent) break; //if already a heap
+           this.value[parentIdx] = element;
+           this.value[idx] = parent;
+           idx = parentIdx
+       }
+
+    }
+
+    insert(value){
+         this.value.push(value);
+         this.bubbleUp();
+         return this.value;
+
+    }
+
+    //after removing max element and swapping with first we need to make structure it as heap
+    sinkDown(){
+        let idx = 0;
+        const length = this.value.length;
+        let element =this.value[0];
+        while(true){
+            let leftChildIdx = 2*idx + 1;
+            let rightChildIdx = 2*idx + 2;
+            let leftChild,rightChild;
+            let swap=null;
+            
+            if(leftChildIdx<length){//check rightChild present ot not
+                leftChild = this.value[leftChildIdx];
+                if(leftChild>element){
+                    swap = leftChildIdx;
+                }
+            }
+
+            if(rightChildIdx<length){//check right child present or not
+                rightChild = this.value[rightChildIdx];
+                if((swap===null && rightChild>element) || (swap!==null && rightChild>leftChild)){
+                    swap = rightChildIdx;
+                }
+            }
+
+            if(swap===null) break;
+            this.value[idx] = this.value[swap];
+            this.value[swap] = element;
+            idx = swap;
+        }
+    }
+    //extract the top max item and make it heap again
+    extractMax(){
+        let max = this.value[0];
+        let end = this.value.pop();
+        if(this.value.length>0){
+            this.value[0] = end;
+            this.sinkDown();
+        }
+        
+        return this.value;
+    }
+}
+
+let bHeap = new BinaryHeap();
+bHeap.value = [41,39,33,18,27,12]
+
