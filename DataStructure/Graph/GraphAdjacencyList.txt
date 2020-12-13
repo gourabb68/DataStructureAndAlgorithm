@@ -1,0 +1,41 @@
+//implement a graph using GraphAdjacencyList
+class Graph{
+    constructor(){
+        this.adjacencyList =[];
+    }
+
+    //add vertex
+    addVertex(key){
+        if(!this.adjacencyList[key]) this.adjacencyList[key] =[];
+    }
+
+    //add edges
+    addEdge(v1,v2){
+        this.adjacencyList[v1].push(v2);
+        this.adjacencyList[v2].push(v1);
+    }
+
+    //remove Edge
+    removeEdge(v1,v2){
+        this.adjacencyList[v1] = this.adjacencyList[v1].filter(v=>v!==v2)
+        this.adjacencyList[v2] = this.adjacencyList[v2].filter(v=>v!==v1)
+    }
+
+    //remove Vertex
+    removeVertex(vertex){
+        while(this.adjacencyList[vertex].length){
+            const adjacentVertex = this.adjacencyList[vertex].pop();
+            this.removeEdge(vertex, adjacentVertex);
+        }
+        delete this.adjacencyList[vertex];
+    }
+}
+
+let g = new Graph();
+g.addVertex("Tokyo");
+g.addVertex("London");
+g.addVertex("Dubai");
+g.addVertex("Kolkata");
+g.addEdge('Tokyo','Kolkata')
+g.addEdge('Dubai','Kolkata')
+g.addEdge('Tokyo','Dubai')
