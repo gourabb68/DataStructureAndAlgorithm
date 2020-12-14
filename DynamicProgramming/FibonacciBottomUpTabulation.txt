@@ -1,0 +1,48 @@
+// //with out dynamic programming
+// function fib(n){
+//     if(n<=2) return 1;
+//     return fib(n-1) + fib(n-2);
+// }
+// let t1 = performance.now();
+// console.log(fib(40))
+// let t2 = performance.now();
+// console.log("time taken for fib(40) :" + (t2-t1)/1000 +" sec");
+// let t3 = performance.now();
+// console.log(fib(45))
+// let t4 = performance.now();
+// console.log("time taken fib(45) :" + (t4-t3)/1000 +" sec");
+
+// // with dynamic programming
+// function fibDP(n,memo=[]){
+//     if(memo[n]!== undefined) return memo[n];
+//     if(n<=2) return 1;
+//     var res = fibDP(n-1,memo) + fibDP(n-2,memo);
+//     memo[n] = res;
+//     return res;
+// }
+// let t1 = performance.now();
+// console.log(fibDP(40))
+// let t2 = performance.now();
+// console.log("time taken for fibDP(40) :" + (t2-t1)/1000 +" sec");
+// let t3 = performance.now();
+// console.log(fibDP(45))
+// let t4 = performance.now();
+// console.log("time taken fibDP(45) :" + (t4-t3)/1000 +" sec");
+
+//with tabulation bottom-up approach
+function fibTab(n){
+        if(n<=2) return 1;
+        let fibNum=[0,1,1];
+        for(let i=3;i<=n;i++){
+            fibNum[i] = fibNum[i-1] +  fibNum[i-1]
+        }
+        return fibNum[n];
+}
+let t1 = performance.now();
+console.log(fibTab(40))
+let t2 = performance.now();
+console.log("time taken for fibTab(40) :" + (t2-t1)/1000 +" sec");
+let t3 = performance.now();
+console.log(fibTab(45))
+let t4 = performance.now();
+console.log("time taken fibTab(45) :" + (t4-t3)/1000 +" sec");
